@@ -5,6 +5,7 @@ app.controller("mainCtrl", ['$scope', function($scope) {
     id: 'vid1',
     poster: 'http://video-js.zencoder.com/oceans-clip.png',
     datasetup: '{}',
+    preload: 'auto',
     width: '640',
     height: '400'
   }];
@@ -28,7 +29,7 @@ app.directive('videojs', function () {
     var setup = {
         'techOrder': ['html5', 'flash'],
         'controls': true,
-        'preload': 'auto',
+        'preload': scope.params[0].preload,
         'autoplay': false,
         'height': scope.params[0].height,
         'width': scope.params[0].width
@@ -46,7 +47,8 @@ app.directive('videojs', function () {
     scope.$on('$destroy', function () {
       player.dispose();
     });
-  } return {
+  }
+  return {
     restrict : 'A',
     link : linker
   };
